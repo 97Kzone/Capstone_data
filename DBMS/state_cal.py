@@ -630,7 +630,7 @@ def evalu_lastday(code):
 # 일일 적정주가 업데이트용 
 def daily_evalu_update():
     for code in code_list:
-        sql = "select date, eps from stock_indicator where code = %s and date <= '2022-06' limit 4"
+        sql = "select date, eps from stock_indicator where code = %s and date <= '2022-09' limit 4"
         datas = conn.execute(sql, code).fetchall()
 
         #1년치 재무제표가 없다면 구할 수 없다.
@@ -641,11 +641,11 @@ def daily_evalu_update():
         eps = datas[3][1] + datas[2][1] + datas[1][1] + datas[0][1]
             
         #업데이트할 날짜 범위를 구하자
-        tmp = evalu_lastday(code)
-        if tmp == False:
-            continue
+        # tmp = evalu_lastday(code)
+        # if tmp == False:
+        #     continue
         start = "2022-09-01"
-        end = std_day()
+        end = "2022-11-08"
 
         sql = "select date, per, pbr from stock_marcap where code = %s and date between %s and %s"
         datas2 = list(conn.execute(sql, (code, start, end)).fetchall())
@@ -659,7 +659,7 @@ def daily_evalu_update():
 
             sql = "INSERT INTO daily_evalutation (date, code, daily_proper_price, evalutation_score, donda_score) values(%s, %s, %s, %s, %s) \
             ON DUPLICATE KEY UPDATE daily_proper_price = %s, evalutation_score = %s, donda_score = 0"
-            # sql = "UPDATE daily_evalutation SET daily_proper_price = %s, evalutation_score= %s where date = %s and code = %s"
+            # sql = "UPDATE daily_evalutation SET daily_proper_price = %s, evalutation_score= %s, donda_score=%s where date = %s and code = %s"
             conn.execute(sql, (data[0], code, v, 0, 0, v, 0))
             # conn.commit()
 
@@ -700,7 +700,7 @@ def daily_donda():
 def daily_evalu_score():
     for code in code_list:
         # sql = "select date, daily_proper_price from daily_evalutation where code = %s and evalutation_score = 0 order by date"
-        sql = "select date, daily_proper_price from daily_evalutation where code = %s and date between '2022-09-01' and '2022-11-04'"
+        sql = "select date, daily_proper_price from daily_evalutation where code = %s and date between '2022-09-01' and '2022-11-08'"
         datas = list(conn.execute(sql, code).fetchall())
 
         if len(datas) == 0:

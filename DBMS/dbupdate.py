@@ -20,7 +20,7 @@ import pymysql
 # state_cal.every_pebr() # 오늘날짜까지 per, pbr, psr update (날짜 자동화 O)
 # state_cal.sector_pebr() # 모든 업종 평균 per, pbr, psr (날짜 자동화 O)
 # state_cal.daily_evalu_update() # 종목별 적정주가 업데이트 (날짜 자동화 O)
-state_cal.daily_evalu_score() # 당일주가 / 적정주가 비율 계산 (아직 문제 많음 사용 X)
+# state_cal.daily_evalu_score() # 당일주가 / 적정주가 비율 계산 (아직 문제 많음 사용 X)
 
 # 4. 재무제표가 추가되면 이용할 메소드 (분기)
 # dataToDb.stock_statement() #재무제표 추가 됐을 때 사용
@@ -30,7 +30,7 @@ state_cal.daily_evalu_score() # 당일주가 / 적정주가 비율 계산 (아�
 # state_cal.cal_epsrate() # EPS 증가율
 # state_cal.cal_pegr() 
 # state_cal.cal_evalu()
-
+# state_cal.daily_evalu_update()
 
 # 5. 아직 사용하지 않는 메소드
 # daily_donda() # 돈다지수 초회 세팅용 (분기 + 일일 평균 값)
