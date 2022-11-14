@@ -658,7 +658,7 @@ def daily_evalu_update():
 
             sql = "INSERT INTO daily_evalutation (date, code, daily_proper_price, evalutation_score, donda_score) values(%s, %s, %s, %s, %s) \
             ON DUPLICATE KEY UPDATE daily_proper_price = %s, evalutation_score = %s, donda_score = 0"
-            # sql = "UPDATE daily_evalutation SET daily_proper_price = %s, evalutation_score= %s where date = %s and code = %s"
+            # sql = "UPDATE daily_evalutation SET daily_proper_price = %s, evalutation_score= %s, donda_score=%s where date = %s and code = %s"
             conn.execute(sql, (data[0], code, v, 0, 0, v, 0))
             # conn.commit()
 

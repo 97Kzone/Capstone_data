@@ -6,3 +6,4 @@ stock-server
 venv
 .vscode
 requirements.txt
+config.json

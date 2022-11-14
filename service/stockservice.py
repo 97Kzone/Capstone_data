@@ -1,4 +1,4 @@
-from dbms.db import engine
+from DBMS.db import engine
 from collections import defaultdict
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
@@ -8,9 +8,9 @@ import pymysql
 #22.10.11 임시 DB connect
 connect = pymysql.connect(
     host="127.0.0.1",
-    port=13306,
+    port=3306,
     user="root",
-    password="1234",
+    password="dpeb4815",
     db="capstone",
     charset="utf8")
 

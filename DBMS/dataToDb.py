@@ -41,11 +41,11 @@ def every_do():
 
 # 재무제표
 def stock_statement():
-    f = open("22_0203.csv", 'r', encoding="cp949")
+    f = open("22_0203.csv", 'rt', encoding="UTF-8")
     csvReader = csv.reader(f)
-
+ 
     for row in csvReader:
-        if row[0] == "Column1": #첫 행은 컬럼명이니까 PASS
+        if row[0] == "": #첫 행은 컬럼명이니까 PASS
             continue
 
         code = row[1].zfill(6)

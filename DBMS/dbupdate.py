@@ -31,7 +31,7 @@ state_cal.daily_donda() # 돈다지수
 # state_cal.cal_epsrate() # EPS 증가율
 # state_cal.cal_pegr() 
 # state_cal.cal_evalu()
-
+# state_cal.daily_evalu_update()
 
 # 5. 아직 사용하지 않는 메소드
 # daily_donda() # 돈다지수 초회 세팅용 (분기 + 일일 평균 값)
