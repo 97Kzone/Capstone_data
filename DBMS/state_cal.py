@@ -402,9 +402,9 @@ def sector_pebr():
             if per == 0 and pbr == 0 and psr == 0:
                 continue
             
-            # sql = "INSERT INTO stock_sector_daily (date, sector, sector_per, sector_pbr, sector_psr) values (%s, %s, %s, %s, %s)"
-            sql = "UPDATE stock_sector_daily SET sector_per = %s, sector_pbr = %s, sector_psr = %s where date = %s and sector = %s"
-            conn.execute(sql, (per, pbr, psr, date, sector[0]))
+            sql = "INSERT INTO stock_sector_daily (date, sector, sector_per, sector_pbr, sector_psr) values (%s, %s, %s, %s, %s)"
+            # sql = "UPDATE stock_sector_daily SET sector_per = %s, sector_pbr = %s, sector_psr = %s where date = %s and sector = %s"
+            conn.execute(sql, (date, sector[0], per, pbr, psr))
             print(sector, date, " OK")
             
     # conn.commit()
@@ -630,7 +630,7 @@ def evalu_lastday(code):
 # 일일 적정주가 업데이트용 
 def daily_evalu_update():
     for code in code_list:
-        sql = "select date, eps from stock_indicator where code = %s and date <= '2022-06' limit 4"
+        sql = "select date, eps from stock_indicator where code = %s and date <= '2022-09' limit 4"
         datas = conn.execute(sql, code).fetchall()
 
         #1년치 재무제표가 없다면 구할 수 없다.
@@ -641,10 +641,9 @@ def daily_evalu_update():
         eps = datas[3][1] + datas[2][1] + datas[1][1] + datas[0][1]
             
         #업데이트할 날짜 범위를 구하자
-        tmp = evalu_lastday(code)
-        if tmp == False:
+        start = evalu_lastday(code)
+        if start == False:
             continue
-        start = "2022-09-01"
         end = std_day()
 
         sql = "select date, per, pbr from stock_marcap where code = %s and date between %s and %s"
@@ -690,17 +689,16 @@ def daily_donda():
             for date, daily_p in datas2:
                 donda = round((value + daily_p) / 3) # 평균 낸 돈다지수
 
-                # sql = "UPDATE daily_evalutation SET donda_score = %s where code = %s and date = %s" 
-                # conn.execute(sql, (donda, code, date))
-                print(date, donda)
+                sql = "UPDATE daily_evalutation SET donda_score = %s where code = %s and date = %s" 
+                conn.execute(sql, (donda, code, date))
         
         print(code + " is OK")
     
 # 일일 적정주가와 현재주가를 비교, 계산
 def daily_evalu_score():
     for code in code_list:
-        # sql = "select date, daily_proper_price from daily_evalutation where code = %s and evalutation_score = 0 order by date"
-        sql = "select date, daily_proper_price from daily_evalutation where code = %s and date between '2022-09-01' and '2022-11-04'"
+        sql = "select date, daily_proper_price from daily_evalutation where code = %s and evalutation_score = 0 order by date"
+        # sql = "select date, daily_proper_price from daily_evalutation where code = %s and date between '2022-09-01' and '2022-11-04'"
         datas = list(conn.execute(sql, code).fetchall())
 
         if len(datas) == 0:
