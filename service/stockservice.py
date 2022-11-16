@@ -220,7 +220,7 @@ def type2graph(type, code):
     elif type == "gross_margin":
         sql = "select date, gross_margin from stock_statements where code = %s" 
 
-    conn.execute(sql, code)
+    data = conn.execute(sql, code)
     data = conn.fetchall()
 
     if len(data) == 0:

@@ -697,17 +697,20 @@ def daily_donda():
 # 일일 적정주가와 현재주가를 비교, 계산
 def daily_evalu_score():
     for code in code_list:
-        sql = "select date, daily_proper_price from daily_evalutation where code = %s and evalutation_score = 0 order by date"
-        # sql = "select date, daily_proper_price from daily_evalutation where code = %s and date between '2022-09-01' and '2022-11-04'"
+        # sql = "select date, daily_proper_price from daily_evalutation where code = %s and evalutation_score = 0 order by date"
+        sql = "select date, daily_proper_price from daily_evalutation where code = %s and date between '2022-11-14' and '2022-11-16'"
         datas = list(conn.execute(sql, code).fetchall())
+        # datas = conn.execute(sql).fetchall()
 
         if len(datas) == 0:
             print(code + " 이 종목은 데이터가 없습니다")
             continue
 
-        start = datas[0][0]
-        end = datas[-1][0]
-
+        # start = datas[0][0]
+        # end = datas[-1][0]
+        
+        start = '2022-11-14'
+        end = '2022-11-16'
         sql = "select date, close from stock_marcap where code = %s and date between %s and %s"
         datas2 = list(conn.execute(sql, (code, start, end)).fetchall())
 
@@ -722,8 +725,9 @@ def daily_evalu_score():
         
             v = round(v2 / v1, 2)
             v = (1-v) * -100
+
             sql = 'UPDATE daily_evalutation SET evalutation_score = %s where date = %s and code = %s'
             conn.execute(sql, (v, date, code))
             # conn.commit()
-            
+
         print(code + "OK")

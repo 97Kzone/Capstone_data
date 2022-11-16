@@ -12,7 +12,7 @@ def dateisidx(datas):
                 data[i] = float(data[i])
 
         temp = {data[1]: dict()}
-        temp[data[1]] = {"close": data[2], "open": data[3], "high": data[4], "low": data[5], "volume": data[6], "changes": data[7]}
+        temp[data[1]] = {"close": data[3], "open": data[2], "high": data[4], "low": data[5], "volume": data[6], "changes": data[7]}
 
         dic[data[0]].append(temp)
         
