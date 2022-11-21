@@ -1,4 +1,4 @@
-from DBMS.db import engine
+from dbms.db import engine
 from collections import defaultdict
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
@@ -8,9 +8,9 @@ import pymysql
 #22.10.11 임시 DB connect
 connect = pymysql.connect(
     host="127.0.0.1",
-    port=3306,
+    port=13306,
     user="root",
-    password="dpeb4815",
+    password="1234",
     db="capstone",
     charset="utf8")
 
@@ -30,8 +30,7 @@ def lastday():
 
     return data[0][0]
 
-temp = lastday()
-last_day = temp
+last_day = lastday()
 
 def match_corp():
     sql = "select code, name from corp_krx"

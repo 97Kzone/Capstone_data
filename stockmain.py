@@ -16,7 +16,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 #     my_server_host = "127.0.0.1"
 #     rest_port = 8050
 #     ec.init(eureka_server="http://localhost:8761/eureka",
-#             app_stock_code="stock-service",
+#             app_name="stock-service",
 #             instance_host=my_server_host,
 #             instance_port=rest_port)
 
@@ -174,7 +174,7 @@ async def stock_evaluation(stockcode: str):
 #기업의 적정주가 (일일)
 @app.get("/stock/{stockcode}/evaluation/daily")
 async def stock_daily_evaluation(stockcode: str):
-    res = stockservice.get_daily_evalutation(stockcode)
+    res = stockservice.get_daily_evalutation(stockcode) 
     return res
 
 if __name__ == '__main__':
