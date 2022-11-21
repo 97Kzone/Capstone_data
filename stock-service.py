@@ -9,20 +9,22 @@ import service.stocknews as stocknews
 
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
 # ##--------------- Eureka 설정 --------------##
-# nest_asyncio.apply()
+nest_asyncio.apply()
 
-# async def set_eureka():
-#     my_server_host = "127.0.0.1"
-#     rest_port = 8050
-#     ec.init(eureka_server="http://localhost:8761/eureka",
-#             app_name="stock-service",
-#             instance_host=my_server_host,
-#             instance_port=rest_port)
+async def set_eureka():
+    my_server_host = "127.0.0.1"
+    rest_port = 8050
+    ec.init(eureka_server="http://localhost:8761/eureka",
+            app_name="stock-service",
+            instance_host=my_server_host,
+            instance_port=rest_port)
 
-# asyncio.run(set_eureka())
-# set_eureka()  
+asyncio.run(set_eureka())
+set_eureka()  
 # ##------------------------------------------##
+
 app = FastAPI()
 
 #서버가 잘 붙었나 확인
@@ -184,5 +186,5 @@ async def stock_donda_evaluation(stockcode: str):
     return res
 
 if __name__ == '__main__':
-    uvicorn.run(app="stock-service:app", port=8000, reload=True)
+    uvicorn.run(app="stock-service:app", port=8050, reload=True)
 
