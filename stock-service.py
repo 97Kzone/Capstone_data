@@ -177,6 +177,12 @@ async def stock_daily_evaluation(stockcode: str):
     res = stockservice.get_daily_evalutation(stockcode) 
     return res
 
+#기업의 돈다지수 (일일)
+@app.get("/stock/{stockcode}/evaluation/donda")
+async def stock_donda_evaluation(stockcode: str):
+    res = stockservice.get_donda_evalutation(stockcode) 
+    return res
+
 if __name__ == '__main__':
-    uvicorn.run(app="stockmain:app", port=8000, reload=True)
+    uvicorn.run(app="stock-service:app", port=8000, reload=True)
 

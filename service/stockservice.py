@@ -296,6 +296,13 @@ def get_daily_evalutation(code):
 
     return process_data.daily_evalu(data)
 
+def get_donda_evalutation(code):
+    sql = "select date, donda_score from daily_evalutation where code = %s and date >= %s"
+    conn.execute(sql, (code, b4_3year))
+    data = list(conn.fetchall())
+
+    return process_data.daily_evalu(data)
+
 def findDailyIndicator(code):
     sql = "select date, per, pbr, psr from stock_marcap where code = %s and date >= %s"
     conn.execute(sql, (code, b4year))
