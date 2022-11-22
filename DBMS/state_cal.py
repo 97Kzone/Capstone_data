@@ -706,7 +706,7 @@ def dailyDondaUpdate():
         value = sum(datas[0][1:])
         
         # sql = "select date from daily_evalutation where code = %s and donda_score = 0"
-        sql = "select date from daily_evalutation where code = %s and date between '2022-11-14' and '2022-11-18'"
+        sql = "select date from daily_evalutation where code = %s and date between '2022-11-19' and '2022-11-22'"
         dates = conn.execute(sql, code).fetchall()
         
         if len(dates) == 0:
@@ -730,7 +730,7 @@ def dailyDondaUpdate():
 def daily_evalu_score():
     for code in code_list:
         # sql = "select date, daily_proper_price from daily_evalutation where code = %s and evalutation_score = 0 order by date"
-        sql = "select date, daily_proper_price from daily_evalutation where code = %s and date between '2022-11-14' and '2022-11-18'"
+        sql = "select date, daily_proper_price from daily_evalutation where code = %s and date between '2022-11-19' and '2022-11-22'"
         datas = list(conn.execute(sql, code).fetchall())
         # datas = conn.execute(sql).fetchall()
 
@@ -741,8 +741,8 @@ def daily_evalu_score():
         # start = datas[0][0]
         # end = datas[-1][0]
         
-        start = '2022-11-14'
-        end = '2022-11-18'
+        start = '2022-11-19'
+        end = '2022-11-22'
         sql = "select date, close from stock_marcap where code = %s and date between %s and %s"
         datas2 = list(conn.execute(sql, (code, start, end)).fetchall())
 

@@ -202,21 +202,21 @@ def type2graph(type, code):
         sql = "select date, asset from stock_statements where code = %s"
     elif type == "equity":
         sql = "select date, equity from stock_statements where code = %s" 
-    elif type == "equity_non":
+    elif type == "equityNon":
         sql = "select date, equity_non from stock_statements where code = %s" 
     elif type == "liability":
         sql = "select date, liability from stock_statements where code = %s"
-    elif type == "current_asset":
+    elif type == "currentAsset":
         sql = "select date, current_asset from stock_statements where code = %s"
     elif type == "profit":
         sql = "select date, profit from stock_statements where code = %s"
-    elif type == "profit_non":
+    elif type == "profitNon":
         sql = "select date, profit_non from stock_statements where code = %s"
     elif type == "revenue":
         sql = "select date, revenue from stock_statements where code = %s"
     elif type == "cash":
         sql = "select date, cash from stock_statements where code = %s"
-    elif type == "gross_margin":
+    elif type == "grossMargin":
         sql = "select date, gross_margin from stock_statements where code = %s" 
 
     data = conn.execute(sql, code)
